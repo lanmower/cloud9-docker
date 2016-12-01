@@ -35,7 +35,7 @@ VOLUME /workspace
 # ------------------------------------------------------------------------------
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+RUN curl https://install.meteor.com/ | sh
 # ------------------------------------------------------------------------------
 # Expose ports.
 EXPOSE 80
