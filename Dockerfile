@@ -30,7 +30,8 @@ ADD conf/cloud9.conf /etc/supervisor/conf.d/
 # ------------------------------------------------------------------------------
 # Add volumes
 RUN mkdir /workspace
-VOLUME /workspace
+
+curl https://install.meteor.com/ | sh
 
 # ------------------------------------------------------------------------------
 # Clean up APT when done.
