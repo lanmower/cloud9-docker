@@ -8,8 +8,16 @@ MAINTAINER Kevin Delfour <kevin@delfour.eu>
 # ------------------------------------------------------------------------------
 # Install base
 RUN apt-get update
-RUN apt-get install -y build-essential g++ curl libssl-dev apache2-utils git libxml2-dev sshfs
-
+RUN apt-get install -y build-essential g++ curl libssl-dev apache2-utils git libxml2-dev sshfs cpanminus
+RUN apt-get install -y makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl
+RUN sudo apt-get install -y libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus
+RUN cpanm "Class::Load Crypt::OpenSSL::RSA Data::Uniqid Dist::CheckConflicts JSON JSON::WebToken JSON::WebToken::Crypt::RSA Module::Implementation Module::Runtime Package::Stash Package::Stash::XS Readonly Sys::MemInfo Test::Fatal Test::Mock::Guard Test::MockObject Test::Requires Try::Tiny"
+RUN export PERL_MM_USE_DEFAULT=1
+RUN perl -MCPAN -e 'install Unicode::String'
+RUN git clone git://github.com/imapsync/imapsync.git
+RUN cd imapsync
+RUN mkdir dist
+RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup | bash -
