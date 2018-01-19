@@ -13,6 +13,7 @@ RUN apt-get install -y makepasswd rcs perl-doc libio-tee-perl git libmail-imapcl
 RUN sudo apt-get install -y libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus
 RUN cpanm "Class::Load Crypt::OpenSSL::RSA Data::Uniqid Dist::CheckConflicts JSON JSON::WebToken JSON::WebToken::Crypt::RSA Module::Implementation Module::Runtime Package::Stash Package::Stash::XS Readonly Sys::MemInfo Test::Fatal Test::Mock::Guard Test::MockObject Test::Requires Try::Tiny"
 RUN cpanm "Crypt::OpenSSL::RSA Data::Uniqid JSON JSON::WebToken JSON::WebToken::Crypt::RSA Readonly Sys::MemInfo Test::Mock::Guard Test::MockObject"
+RUN cpanm "Data::Uniqid JSON JSON::WebToken JSON::WebToken::Crypt::RSA Readonly Sys::MemInfo Test::Mock::Guard Test::MockObject"
 RUN export PERL_MM_USE_DEFAULT=1
 RUN perl -MCPAN -e 'install Unicode::String'
 RUN git clone git://github.com/imapsync/imapsync.git
