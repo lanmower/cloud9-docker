@@ -33,14 +33,17 @@ RUN mkdir /workspace
 
 # ------------------------------------------------------------------------------
 # Clean up APT when done.
+RUN useradd user
+RUN mkdir /home/user
+RUN chown user /home/user
+RUN su user
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN curl https://install.meteor.com/ | sh
 
-RUN useradd user
 # ------------------------------------------------------------------------------
 # Expose ports.
 EXPOSE 80
 EXPOSE 3000
 # ------------------------------------------------------------------------------
 # Start supervisor, define default command.
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "user"]
