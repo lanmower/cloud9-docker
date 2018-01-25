@@ -5,6 +5,11 @@
 FROM kdelfour/supervisor-docker
 MAINTAINER Kevin Delfour <kevin@delfour.eu>
 
+RUN echo \
+   'deb ftp://ftp.us.debian.org/debian/ jessie main\n \
+    deb ftp://ftp.us.debian.org/debian/ jessie-updates main\n \
+    deb http://security.debian.org jessie/updates main\n' \
+    > /etc/apt/sources.list
 # ------------------------------------------------------------------------------
 # Install base
 RUN apt-get update
