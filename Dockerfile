@@ -9,8 +9,8 @@ MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 # Install base
 RUN apt-get update
 
-RUN apt get update && apt install -y apache2 openssh-server supervisor
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+RUN apt get update && apt install -y openssh-server supervisor
+RUN mkdir -p /var/run/sshd /var/log/supervisor
 
 RUN useradd user
 RUN mkdir /home/user
