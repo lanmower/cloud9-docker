@@ -64,7 +64,7 @@ RUN perl -MCPAN -e 'install Unicode::String'
 RUN git clone git://github.com/imapsync/imapsync.git
 RUN cd imapsync
 RUN mkdir dist
-RUN make install
+#RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup | bash -
