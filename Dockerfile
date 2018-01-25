@@ -9,7 +9,7 @@ MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 # Install base
 RUN apt-get update
 
-RUN apt-get install -y openssh-server supervisor
+RUN apt-get install -y openssh-server supervisor locales
 RUN mkdir -p /var/run/sshd /var/log/supervisor
 
 RUN useradd user
