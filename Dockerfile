@@ -90,7 +90,7 @@ RUN curl https://install.meteor.com/ | sh
 
 # ------------------------------------------------------------------------------
 # Expose ports.
-EXPOSE 20
+EXPOSE 22
 EXPOSE 80
 EXPOSE 3000
 EXPOSE 4000
