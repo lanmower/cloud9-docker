@@ -20,7 +20,10 @@ RUN echo 'root:almagest1298' | chpasswd
 RUN echo 'user:almagest1298' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+RUN echo '[supervisord]' > /etc/supervisor/supervisord.conf
+RUN echo 'nodaemon=true' > /etc/supervisor/supervisord.conf
+RUN echo '[program:sshd]' > /etc/supervisor/supervisord.conf
+RUN echo 'command=/usr/sbin/sshd -D' > /etc/supervisor/supervisord.conf
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
