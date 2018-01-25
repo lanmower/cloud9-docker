@@ -2,7 +2,7 @@
 # Based on a work at https://github.com/docker/docker.
 # ------------------------------------------------------------------------------
 # Pull base image.
-From ubuntu16.04
+From ubuntu
 MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 
 # ------------------------------------------------------------------------------
