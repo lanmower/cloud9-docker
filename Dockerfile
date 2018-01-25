@@ -90,8 +90,11 @@ RUN curl https://install.meteor.com/ | sh
 
 # ------------------------------------------------------------------------------
 # Expose ports.
+EXPOSE 20
 EXPOSE 80
 EXPOSE 3000
+EXPOSE 4000
+EXPOSE 5000
 # ------------------------------------------------------------------------------
 # Start supervisor, define default command.
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "user"]
