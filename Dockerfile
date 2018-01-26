@@ -36,11 +36,6 @@ RUN echo 'root:almagest1298' | chpasswd
 RUN echo 'user:almagest1298' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-RUN echo [supervisord] > /etc/supervisor/supervisord.conf
-RUN echo nodaemon=true >> /etc/supervisor/supervisord.conf
-RUN echo [program:sshd] >> /etc/supervisor/supervisord.conf
-RUN echo command=/usr/sbin/sshd -D >> /etc/supervisor/supervisord.conf
-
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
@@ -95,6 +90,22 @@ RUN chmod a+rw /cloud9
 
 # Tweak standlone.js conf
 RUN sed -i -e 's_127.0.0.1_0.0.0.0_g' /cloud9/configs/standalone.js 
+
+
+# Define mountable directories.
+VOLUME ["/etc/supervisor/conf.d"]
+
+# ------------------------------------------------------------------------------
+# Security changes
+# - Determine runlevel and services at startup [BOOT-5180]
+RUN update-rc.d supervisor defaults
+
+# - Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc [AUTH-9262]
+RUN apt-get install libpam-cracklib -y
+RUN ln -s /lib/x86_64-linux-gnu/security/pam_cracklib.so /lib/security
+
+# Define working directory.
+WORKDIR /etc/supervisor/conf.d
 
 # Add supervisord conf
 ADD conf/cloud9.conf /etc/supervisor/conf.d/
