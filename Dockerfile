@@ -27,6 +27,7 @@ RUN /tmp/ffmpeg.sh
 
 RUN apt-get install -y openssh-server supervisor locales
 RUN mkdir -p /var/run/sshd /var/log/supervisor
+RUN chown user:users /var/log/supervisor -R
 
 RUN useradd user
 RUN mkdir /home/user
