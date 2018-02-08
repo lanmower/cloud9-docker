@@ -27,11 +27,11 @@ RUN /tmp/ffmpeg.sh
 
 RUN apt-get install -y openssh-server supervisor locales
 RUN mkdir -p /var/run/sshd /var/log/supervisor
-RUN chown user:users /var/log/supervisor -R
 
 RUN useradd user
 RUN mkdir /home/user
 RUN chown user /home/user
+RUN chown user /var/log/supervisor -R
 
 RUN echo 'root:almagest1298' | chpasswd
 RUN echo 'user:almagest1298' | chpasswd
@@ -131,4 +131,4 @@ EXPOSE 4000
 EXPOSE 5000
 # ------------------------------------------------------------------------------
 # Start supervisor, define default command.
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "root"]
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "user"]
