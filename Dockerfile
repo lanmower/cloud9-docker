@@ -68,7 +68,7 @@ RUN mkdir dist
 #RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup | bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - 
 RUN apt-get install -y nodejs
     
 # ------------------------------------------------------------------------------
