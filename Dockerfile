@@ -131,4 +131,4 @@ EXPOSE 4000
 EXPOSE 5000
 # ------------------------------------------------------------------------------
 # Start supervisor, define default command.
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "user"]
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "root"]
