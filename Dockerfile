@@ -7,7 +7,8 @@ MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 
 # ------------------------------------------------------------------------------
 # Install base
-RUN apt-get update
+RUN sed -i'' 's/archive\.ubuntu\.com/us\.archive\.ubuntu\.com/' /etc/apt/sources.list
+RUN apt-get -y update
 
 RUN apt-get install wget apt-utils graphicsmagick libdigest-hmac-perl libfile-copy-recursive-perl libio-tee-perl libunicode-string-perl libmail-imapclient-perl libterm-readkey-perl makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl makepasswd libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus -y --fix-missing 
 
