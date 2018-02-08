@@ -99,6 +99,7 @@ WORKDIR /etc/supervisor/conf.d
 
 # Add supervisord conf
 ADD conf/cloud9.conf /etc/supervisor/conf.d/
+ADD supervisor.conf /etc/supervisor/supervisord.conf
 
 # ------------------------------------------------------------------------------
 # Add volumes
@@ -120,4 +121,4 @@ EXPOSE 4000
 EXPOSE 5000
 # ------------------------------------------------------------------------------
 # Start supervisor, define default command.
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "user"]
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-u", "root"]
