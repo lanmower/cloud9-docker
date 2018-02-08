@@ -99,7 +99,6 @@ WORKDIR /etc/supervisor/conf.d
 
 # Add supervisord conf
 ADD conf/cloud9.conf /etc/supervisor/conf.d/
-ADD supervisor.conf /etc/supervisor/supervisord.conf
 
 # ------------------------------------------------------------------------------
 # Add volumes
