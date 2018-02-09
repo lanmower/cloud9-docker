@@ -82,10 +82,12 @@ RUN cpanm "Test::MockObject"
 RUN cpanm "Test::Requires"
 RUN cpanm "Try::Tiny"
 
+WORKDIR /usr/src
 RUN export PERL_MM_USE_DEFAULT=1
 RUN perl -MCPAN -e 'install Unicode::String'
-RUN git clone git://github.com/imapsync/imapsync.git
-RUN cd imapsync
+RUN cd /usr/src
+RUN git clone git://github.com/imapsync/imapsync.git /usr/src/imapsync
+RUN cd /usr/src/imapsync
 RUN mkdir dist
 #RUN make install
 # ------------------------------------------------------------------------------
