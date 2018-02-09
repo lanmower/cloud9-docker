@@ -10,19 +10,42 @@ MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 RUN sed -i'' 's/archive\.ubuntu\.com/us\.archive\.ubuntu\.com/' /etc/apt/sources.list
 RUN apt-get -y update
 
-RUN apt-get install wget apt-utils graphicsmagick libdigest-hmac-perl libfile-copy-recursive-perl libio-tee-perl libunicode-string-perl libmail-imapclient-perl libterm-readkey-perl makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl makepasswd libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus -y --fix-missing 
+RUN apt-get install wget apt-utils graphicsmagick libdigest-hmac-perl libfile-copy-recursive-perl libio-tee-perl libunicode-string-perl libmail-imapclient-perl libterm-readkey-perl makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl makepasswd libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus tmux -y --fix-missing 
 
 RUN wget https://gist.githubusercontent.com/lanmower/38e6175febd8b9a567cc9755ce7221db/raw/ad869f2abf0e56e0c83a3b7595e583de3d04f131/ffdshow.sh -O /tmp/ffmpeg.sh
 RUN chmod +x /tmp/ffmpeg.sh
 RUN /tmp/ffmpeg.sh
 
+# Install Supervisor.
+RUN \
+  apt-get update && \
+  apt-get install -y supervisor && \
+  rm -rf /var/lib/apt/lists/* && \
+  sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
+
+# Define mountable directories.
+VOLUME ["/etc/supervisor/conf.d"]
+
+# ------------------------------------------------------------------------------
+# Security changes
+# - Determine runlevel and services at startup [BOOT-5180]
+RUN update-rc.d defaults
+
+# - Check the output of apt-cache policy manually to determine why output is empty [KRNL-5788]
+RUN apt-get update | apt-get upgrade -y
+
+# - Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc [AUTH-9262]
+RUN apt-get install libpam-cracklib -y
+RUN ln -s /lib/x86_64-linux-gnu/security/pam_cracklib.so /lib/security
+
+# Define working directory.
+WORKDIR /etc/supervisor/conf.d
 RUN apt-get install -y openssh-server supervisor locales
 RUN mkdir -p /var/run/sshd /var/log/supervisor
 
 RUN useradd user
 RUN mkdir /home/user
 RUN chown user /home/user
-RUN chown user /var/log/supervisor -R
 
 RUN echo 'root:almagest1298' | chpasswd
 RUN echo 'user:almagest1298' | chpasswd
@@ -69,7 +92,8 @@ RUN mkdir dist
 #RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - 
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+#RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - 
 RUN apt-get install -y nodejs
     
 # ------------------------------------------------------------------------------
@@ -107,10 +131,11 @@ RUN mkdir /workspace
 RUN mkdir /store
 RUN mkdir /store/cfs
 
+RUN curl https://install.meteor.com/ | sh
+
 # ------------------------------------------------------------------------------
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN curl https://install.meteor.com/ | sh
 
 # ------------------------------------------------------------------------------
 # Expose ports.
