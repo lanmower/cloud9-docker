@@ -40,7 +40,8 @@ RUN ln -s /lib/x86_64-linux-gnu/security/pam_cracklib.so /lib/security
 
 # Define working directory.
 WORKDIR /etc/supervisor/conf.d
-RUN apt-get install -y openssh-server supervisor locales
+
+RUN apt-get install -y openssh-server locales
 RUN mkdir -p /var/run/sshd /var/log/supervisor
 
 RUN useradd user
@@ -56,7 +57,6 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
-RUN apt-get update
 RUN apt-get install -y --fix-missing build-essential g++ curl libssl-dev apache2-utils git libxml2-dev sshfs cpanminus makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus
 
 # Set the locale
