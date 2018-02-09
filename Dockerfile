@@ -115,10 +115,6 @@ VOLUME ["/etc/supervisor/conf.d"]
 # - Determine runlevel and services at startup [BOOT-5180]
 RUN update-rc.d supervisor defaults
 
-# - Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc [AUTH-9262]
-RUN apt-get install libpam-cracklib -y
-RUN ln -s /lib/x86_64-linux-gnu/security/pam_cracklib.so /lib/security
-
 # Define working directory.
 WORKDIR /etc/supervisor/conf.d
 
