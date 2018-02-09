@@ -29,8 +29,6 @@ VOLUME ["/etc/supervisor/conf.d"]
 # ------------------------------------------------------------------------------
 # Security changes
 # - Determine runlevel and services at startup [BOOT-5180]
-RUN update-rc.d defaults
-
 # - Check the output of apt-cache policy manually to determine why output is empty [KRNL-5788]
 RUN apt-get update | apt-get upgrade -y
 
