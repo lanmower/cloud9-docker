@@ -122,6 +122,7 @@ WORKDIR /etc/supervisor/conf.d
 
 # Add supervisord conf
 ADD conf/cloud9.conf /etc/supervisor/conf.d/
+ADD conf/sshd.conf /etc/supervisor/conf.d/
 ADD conf/cron.conf /etc/supervisor/conf.d/
 
 # ------------------------------------------------------------------------------
