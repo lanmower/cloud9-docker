@@ -134,7 +134,6 @@ RUN curl https://install.meteor.com/ | sh
 # ------------------------------------------------------------------------------
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN rm -r /tmp/tmux-*
 # ------------------------------------------------------------------------------
 # Expose ports.
 EXPOSE 22
