@@ -91,7 +91,7 @@ RUN cd /usr/src
 RUN git clone git://github.com/imapsync/imapsync.git /usr/src/imapsync
 RUN cd /usr/src/imapsync
 RUN mkdir dist
-RUN make install
+# RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
