@@ -82,6 +82,7 @@ RUN cpanm "Test::Mock::Guard"
 RUN cpanm "Test::MockObject"
 RUN cpanm "Test::Requires"
 RUN cpanm "Try::Tiny"
+RUN cpanm "Regexp::Common"
 
 WORKDIR /usr/src
 RUN export PERL_MM_USE_DEFAULT=1
