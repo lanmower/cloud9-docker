@@ -87,11 +87,11 @@ RUN cpanm "Regexp::Common"
 WORKDIR /usr/src
 RUN export PERL_MM_USE_DEFAULT=1
 RUN perl -MCPAN -e 'install Unicode::String'
-RUN cd /usr/src
+WORKDIR "/usr/src"
 RUN git clone git://github.com/imapsync/imapsync.git /usr/src/imapsync
-RUN cd /usr/src/imapsync
+WORKDIR "/usr/src/imapsync"
+RUN make install
 RUN mkdir dist
-# RUN make install
 # ------------------------------------------------------------------------------
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
