@@ -8,8 +8,8 @@ MAINTAINER Almagest fraternite <almagestfraternite@gmail.com>
 # ------------------------------------------------------------------------------
 # Install base
 RUN apt-get update
-RUN apt-get install gnupg nano libnet-ifconfig-wrapper-perl software-properties-common wget sudo apt-utils graphicsmagick libdigest-hmac-perl libfile-copy-recursive-perl libio-tee-perl libunicode-string-perl libmail-imapclient-perl libterm-readkey-perl makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl makepasswd libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus tmux -y --fix-missing 
-
+RUN apt-get install gnupg nano libnet-ifconfig-wrapper-perl software-properties-common wget sudo apt-utils graphicsmagick libdigest-hmac-perl libfile-copy-recursive-perl libio-tee-perl libunicode-string-perl libmail-imapclient-perl libterm-readkey-perl makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl makepasswd libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus -y --fix-missing 
+RUN curl -fsSL https://gist.github.com/shime/5706655/raw/install.sh | sudo bash -e
 RUN sed -i'' 's/archive\.ubuntu\.com/us\.archive\.ubuntu\.com/' /etc/apt/sources.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
 
